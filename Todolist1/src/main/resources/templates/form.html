@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1" />
+<title>To Do List Form</title>
+</head>
+<body>
+<form action="#" th:action="@{/save}" th:object="${todoList}" method="POST">
+  Type your work:
+  <br/>
+  <input type="hidden" th:field="*{id}" />
+  <input type="text" th:field="*{text}" />
+  <br />
+  <select th:field="*{status}">
+	  <option value="0">Active</option>
+	  <option value="1">Inactive</option>
+	</select>
+  
+  <br />
+  <button type="submit" value="Submit">Save</button>
+</form>
+</body>
+</html>

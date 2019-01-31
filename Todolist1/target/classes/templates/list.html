@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body>
+    <nav th:replace="layout :: header"></nav>
+	
+    <div class="container main-content list">
+        <div class="row">
+            <a th:href="@{/create}" class="btn btn-success pull-left">
+                <span class="glyphicon glyphicon-plus"></span> Add new Work
+            </a>
+            
+            <form class="form-inline pull-right" action="#" th:action="@{/search}" method="GET">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="q" placeholder="Type something..." />
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+            
+            
+        </div>
+        <br />
+      	<div th:if="${success}" class="row alert alert-success alert-dismissible">
+	        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <span th:text="${success}"></span>
+    	</div>
+    	
+    		<h1 th:text="'there are ' + ${count}" />
+    	
+        <div class="row">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Text</th>
+                        <th>Status</th>
+                    
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                
+                    <tr th:each="lists,iterStart:${list}">
+                        <td th:text="${lists.id}"></td>
+                        <td th:text="${lists.text}"></td>
+                        
+                        <div th:switch="${lists.status}"> 
+						  <td th:case="0">ACTIVE</td>
+						  <td th:case="1" style="color:red;">INACTIVE</td>
+						</div>
+                        
+                        <td><a th:href="@{/edit/{id}(id=${lists.id})}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                        <td><a th:href="@{/delete/{id}(id=${lists.id})}"><span class="glyphicon glyphicon-trash"></span></a></td>
+                    </tr>
+                    
+                   
+                </tbody>
+            </table>
+        </div>
+       
+    </div>
+    <!-- /.container -->
+
+    <footer th:replace="layout :: footer"></footer>
+</body>
+</html>
